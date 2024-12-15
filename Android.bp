@@ -1,0 +1,28 @@
+//
+// SPDX-FileCopyrightText: 2024 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "hbtp_daemon",
+    vendor: true,
+    //recovery_available: true,
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "libutils",
+        "libhbtpfrmwk",
+        "vendor.qti.hardware.improvetouch.blobmanager@1.0-service",
+        "vendor.qti.hardware.improvetouch.gesturemanager@1.0-service",
+        "vendor.qti.hardware.improvetouch.touchcompanion@1.0-service",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    srcs: [
+        "main.cpp",
+        "daemon.cpp",
+    ],
+    owner: "qti",
+}
