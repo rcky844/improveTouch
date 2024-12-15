@@ -11,6 +11,7 @@ cc_binary {
         "libbase",
         "libhidlbase",
         "libutils",
+        "libhbtpclient",
         "libhbtpfrmwk",
         "vendor.qti.hardware.improvetouch.blobmanager@1.0-service",
         "vendor.qti.hardware.improvetouch.gesturemanager@1.0-service",
@@ -23,6 +24,9 @@ cc_binary {
     srcs: [
         "main.cpp",
         "daemon.cpp",
+        "tool.cpp",
+        "improveTouch.cpp",
+        "linenoise/linenoise.c",
     ],
     owner: "qti",
 }

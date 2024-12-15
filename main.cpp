@@ -16,6 +16,7 @@
 #include "improveTouch.h"
 
 int daemon_loop(improveTouch::TouchServer::Configs config, const char *userConfig);
+int tool_loop(int argc, char* argv[]);
 
 /* Operation modes:
  * - 0: daemon
@@ -100,7 +101,7 @@ int main(int argc, char* argv[]) {
             break;
 
         case 1:
-            // TODO
+            ret = tool_loop(argc, argv);
             break;
     }
 
