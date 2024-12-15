@@ -166,7 +166,10 @@ void handle_cmd(char *line) {
             LOG(DEBUG) << "Handling command: " << cmd;
 
             cmd = strtok(NULL, "");
-            it->second(cmd);
+            if (cmd)
+                it->second(cmd);
+            else
+                it->second(0);
             break;
         }
     }
