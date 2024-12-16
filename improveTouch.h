@@ -61,6 +61,7 @@ public:
     int pingService();
     int sendCommand(const char* cmd, char **result);
     uint sendEvent(improveTouch::eventType type, improveTouch::eventParam param);
+    uint setAuth(const char *token);
     void setRecordFilter(uint recordFilter);
     int setRecordOutput(int output);
     int startRecord();

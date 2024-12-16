@@ -13,15 +13,24 @@
 #include <unistd.h>
 
 #include <map>
+#include <string>
 
+#include <sys/stat.h>
 #include <android-base/logging.h>
 
 #include "linenoise/linenoise.h"
 #include "improveTouch.h"
 
 using std::map;
+using std::string;
 
 improveTouch::TouchCompanionClient *touchCompanionClient;
+bool dataStorageAvailable = true;
+bool loggingAvailable = true;
+
+// Defines
+#define HBTP_DATA_PATH "/data/vendor/hbtp"
+#define HBTP_SESSIONID_PATH "/data/vendor/hbtp/sessionid"
 
 // Command functions
 void cmd_pingService(char * /* args */) {
@@ -51,7 +60,12 @@ void cmd_stopRecordRolling(char * /* args */) {
     // TODO
 }
 
-void cmd_setRecordFilter(char * /* args */) {
+void cmd_setRecordFilter(char *args) {
+    if (!args) {
+        printf("Not Enough Arguments\n Format:\n setRecordFilter mask(hex)32bit\n");
+        return;
+    }
+
     // TODO
 }
 
@@ -179,9 +193,47 @@ void handle_cmd(char *line) {
     }
 }
 
+void tool_cli_init() {
+    struct stat buf;
+
+    // Check for data storage
+    if (!stat(HBTP_DATA_PATH, &buf) && (buf.st_mode & 0xF000) == 0x4000) {
+        LOG(DEBUG) << "Using data path: " << HBTP_DATA_PATH;
+    } else {
+        dataStorageAvailable = false;
+        LOG(WARNING) << "Data path " << HBTP_DATA_PATH << "not found, disabling data storage";
+    }
+
+    // FIXME: Mad hax
+    char *token = (char *) malloc(15);
+    strcpy(token + 1, "token=0");
+    if ((long) token & 1) token = 0;
+
+    // Test for logging feature
+    if (dataStorageAvailable && !touchCompanionClient->setAuth(token)) {
+        int ret = touchCompanionClient->setRecordOutput(0);
+        if (ret) {
+            printf("Error message: %s\n", improveTouch::errStr(ret));
+            puts("Failed to prepare logging feature");
+            loggingAvailable = false;
+        } else {
+            // Check if there is a logging session present
+            FILE *logCheck = fopen(HBTP_SESSIONID_PATH, "r");
+            if (logCheck) {
+                fclose(logCheck);
+                puts("You have a recording session which was started with startRecordRolling");
+                puts("but, was not stopped yet");
+                puts("You can stop it with stopRecordRolling");
+            }
+        }
+    }
+    free(token);
+}
+
 int tool_loop(int argc, char* argv[]) {
     int ret = 0;
 
+    // Get a handle to TouchCompanionClient
     touchCompanionClient = new improveTouch::TouchCompanionClient();
     ret = touchCompanionClient->init();
     if (ret) {
@@ -190,12 +242,16 @@ int tool_loop(int argc, char* argv[]) {
         goto exit;
     }
 
+    // Process commands when CLI is not requested
     if (argc > 0) {
         argv += 1;
         handle_cmd(*argv);
         puts(*argv);
         return 0;
     }
+
+    // Perform additional checks
+    tool_cli_init();
 
     puts("improveTouch CLI");
     while (true) {
