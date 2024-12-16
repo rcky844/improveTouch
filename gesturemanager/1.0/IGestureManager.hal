@@ -1,0 +1,40 @@
+/*
+ * Copyright (C) 2024 The LineageOS Project
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package vendor.lineage.improvetouch.gesturemanager@1.0;
+
+import IGestureCallBack;
+import types;
+
+interface IGestureManager {
+    startGestureDetection();
+
+    stopGestureDetection();
+
+    subscribe();
+
+    unsubscribe();
+
+    enableWakeup();
+
+    disableWakeup();
+
+    addGesture(GestureData data1, GestureData data2, GestureData data3)
+        generates (int32_t unk1, int32_t unk2);
+
+    deleteGesture(int32_t unk);
+
+    verifyGesture(GestureData data) generates (int32_t unk1, int32_t unk2);
+
+    enableGesture(int32_t unk);
+
+    disableGesture(int32_t unk);
+
+    getMaxPreDefinedGesture() generates (int32_t unk1, int32_t unk2);
+
+    getMaxUserDefinedGesture() generates (int32_t unk1, int32_t unk2);
+
+    registerCallback(IGestureCallBack callback);
+};

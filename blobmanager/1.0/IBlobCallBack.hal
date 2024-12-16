@@ -1,0 +1,12 @@
+/*
+ * Copyright (C) 2024 The LineageOS Project
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package vendor.lineage.improvetouch.blobmanager@1.0;
+
+import types;
+
+interface IBlobCallBack {
+    oneway gestureCallback(GestureData blobData);
+};

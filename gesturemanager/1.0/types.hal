@@ -1,0 +1,27 @@
+/*
+ * Copyright (C) 2024 The LineageOS Project
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package vendor.lineage.improvetouch.gesturemanager@1.0;
+
+struct GestureData {
+    int32_t unk1;
+    int32_t unk2;
+    int32_t unk3; // Unknown, padding of 0x4 bytes
+    int32_t unk4; // Unknown, padding of 0x4 bytes
+    int32_t unk5; // Unknown, padding of 0x4 bytes
+    int32_t unk6; // Unknown, padding of 0x4 bytes
+    int32_t unk7; // Unknown, padding of 0x4 bytes
+    int32_t unk8; // Unknown, padding of 0x4 bytes
+    int32_t unk9; // Unknown, padding of 0x4 bytes
+    int32_t unk10; // Unknown, padding of 0x4 bytes
+    int32_t unk11; // Unknown, padding of 0x4 bytes
+    int32_t unk12; // Unknown, padding of 0x4 bytes
+    int32_t unk13; // Unknown, padding of 0x4 bytes
+    int32_t unk14; // Unknown, padding of 0x4 bytes
+    int32_t unk15; // Unknown, padding of 0x4 bytes
+    int32_t unk16; // Unknown, padding of 0x4 bytes
+    int32_t unk17; // Unknown, padding of 0x4 bytes
+    int32_t unk18;
+};

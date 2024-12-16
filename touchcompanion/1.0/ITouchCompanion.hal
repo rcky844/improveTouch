@@ -1,0 +1,52 @@
+/*
+ * Copyright (C) 2024 The LineageOS Project
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package vendor.lineage.improvetouch.touchcompanion@1.0;
+
+import ITouchCompanionCallback;
+
+interface ITouchCompanion {
+    setConfigData(vec<string> unk);
+
+    setRecordOutput(int32_t unk);
+
+    setRecordFile(string unk);
+
+    setSharedMemory(handle /* hidl_memory */ mem);
+
+    prepareRecord();
+
+    startRecord();
+
+    stopRecord();
+
+    getRecordPacketSize();
+
+    saveSession() generates (int32_t unk1, int32_t unk2);
+
+    restoreSession(int32_t unk);
+
+    sendEvent(int32_t unk1, int32_t unk2);
+
+    sendCommand(string unk) generates (int32_t unk1, string unk2);
+
+    open();
+
+    close();
+
+    setAuth(string unk);
+
+    setConfig(string unk);
+
+    getConfig() generates (int32_t unk1, string unk2);
+
+    reloadConfig(string unk);
+
+    getConfigData() generates (int32_t unk1, vec<string> unk2);
+
+    registerCallback(ITouchCompanionCallback callback);
+
+    unregisterCallback();
+};

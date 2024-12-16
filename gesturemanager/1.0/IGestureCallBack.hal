@@ -1,0 +1,12 @@
+/*
+ * Copyright (C) 2024 The LineageOS Project
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package vendor.lineage.improvetouch.gesturemanager@1.0;
+
+import types;
+
+interface IGestureCallBack {
+    oneway gestureCallback(GestureData gestureData);
+};

@@ -1,0 +1,20 @@
+/*
+ * Copyright (C) 2024 The LineageOS Project
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package vendor.lineage.improvetouch.blobmanager@1.0;
+
+struct BlobMotionEvent {
+    int32_t unk1; // Unknown, padding of 4 bytes
+    int32_t unk2;
+    int32_t unk3;
+    int32_t unk4;
+    int32_t unk5; // Unknown, padding of 4 bytes
+    float unk6;
+};
+
+struct BlobData {
+    int32_t unk; // Unknown, padding of 4 bytes
+    BlobMotionEvent motionEvent;
+};
