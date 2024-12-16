@@ -17,7 +17,7 @@ using android::RefBase;
 #define PROCESSOR_ARM "arm"
 
 // General defines
-#define RECORD_FILTER 1
+#define RECORD_FILTER 0 // TODO: Stop hardcoding
 
 namespace improveTouch {
 enum eventType {
