@@ -21,8 +21,7 @@
 #include "linenoise/linenoise.h"
 #include "improveTouch.h"
 
-using std::map;
-using std::string;
+using namespace std;
 
 improveTouch::TouchCompanionClient *touchCompanionClient;
 bool dataStorageAvailable = true;
@@ -154,7 +153,7 @@ void cmd_exit(char * /* args */) {
 }
 
 // Main loop
-std::map<const char *, void (*)(char *)> commandMap = {
+map<const char *, void (*)(char *)> commandMap = {
     { "pingService", &cmd_pingService },
     { "startRecord", &cmd_startRecord },
     { "stopRecord", &cmd_stopRecord },
@@ -244,9 +243,11 @@ int tool_loop(int argc, char* argv[]) {
 
     // Process commands when CLI is not requested
     if (argc > 0) {
-        argv += 1;
-        handle_cmd(*argv);
-        puts(*argv);
+        string cmd;
+        for (int i = 0; i < argc; i++) {
+            cmd.append(" ").append(argv[i]);
+        }
+        handle_cmd(cmd.data());
         return 0;
     }
 
