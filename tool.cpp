@@ -231,6 +231,7 @@ void tool_cli_init() {
 
 int tool_loop(int argc, char* argv[]) {
     int ret = 0;
+    char *line;
 
     // Get a handle to TouchCompanionClient
     touchCompanionClient = new improveTouch::TouchCompanionClient();
@@ -255,9 +256,7 @@ int tool_loop(int argc, char* argv[]) {
     tool_cli_init();
 
     puts("improveTouch CLI");
-    while (true) {
-        char *line = linenoise("> ");
-
+    while ((line = linenoise("> ")) != NULL) {
         // Process lines
         if (*line) {
             linenoiseHistoryAdd(line);
